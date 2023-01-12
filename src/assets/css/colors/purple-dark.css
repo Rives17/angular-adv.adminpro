@@ -135,10 +135,10 @@ a.link:hover, a.link:focus {
 .label-themecolor {
   background: #7460ee; }
 
-.sidebar-nav > ul > li.active > a {
+.sidebar-nav > ul > li > a.active {
   color: #ffffff;
   border-color: #7460ee; }
-  .sidebar-nav > ul > li.active > a i {
+  .sidebar-nav > ul > li > a.active i {
     color: #ffffff; }
 
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
