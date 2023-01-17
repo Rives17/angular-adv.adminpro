@@ -12,7 +12,7 @@ const routes: Routes = [
   // path: '/auth' AuthRouting
 
   { path: '**', component: NopagefoundComponent},
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  { path: '', redirectTo: '/', pathMatch: 'full' }
 ]
 
 @NgModule({
