@@ -37,6 +37,11 @@ Login register and recover password Page
     .login-box .social {
       display: block;
       margin-bottom: 30px; }
+
+  #google-btn {
+    display: flex;
+    justify-content: center;
+  }
   
   #recoverform {
     display: none; }
