@@ -24,18 +24,31 @@ export class UsuarioService {
               private router: Router,
               private ngZone: NgZone) { }
 
+
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.usuario.uid || '';
+  }
+
               
 
   validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${base_url}/login/renewLogin`, {
-      headers: { 'x-token': token }
+      headers: { 'x-token': this.token }
     }).pipe(
-      tap( (resp: any) => {
+      map( (resp: any) => {
+
+        const { email, google, nombre, role, uid, img = '' } = resp.usuario;
+
+        this.usuario = new Usuario( nombre, email, '', img, google, role, uid)
         localStorage.setItem('token', resp.token);
+        return true
       }),
-      map( resp => true),
+
       catchError( error => of(false) )
     );
   }
@@ -49,6 +62,18 @@ export class UsuarioService {
                   })
                 )
     
+  };
+
+  actualizarPerfil(data: {email: string, nombre: string}) {
+
+    return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {
+      headers: { 'x-token': this.token }
+    })
+    .pipe(
+      tap( (resp: any) => {
+        localStorage.setItem('token', resp.token)
+      })
+    )
   }
 
   login(formData: LoginForm) {
@@ -63,6 +88,7 @@ export class UsuarioService {
   }
 
   loginGoogle( token: string ) {
+    
     return this.http.post(`${base_url}/login/google`, {token})
       .pipe(
         tap( (resp: any) => {
@@ -73,9 +99,9 @@ export class UsuarioService {
 
   logout() {
     localStorage.removeItem('token');
-    console.log(this.usuario);
     
     google.accounts.id.revoke( this.usuario.email, () => {
+      
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login')
       })

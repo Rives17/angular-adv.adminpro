@@ -18,7 +18,6 @@ export class LoginComponent implements AfterViewInit{
   @ViewChild('googleBtn') googleBtn!: ElementRef;
 
   public formSubmitted = false;
-  public usuario!: string;
 
   public loginForm: FormGroup = this.fb.group({
     email: [localStorage.getItem('email') || '', [Validators.required, Validators.email]],
@@ -60,10 +59,6 @@ export class LoginComponent implements AfterViewInit{
     // console.log("Encoded JWT ID token: " + response.credential);
     this.usuarioService.loginGoogle(response.credential)
       .subscribe(resp => {
-        console.log(resp.email);
-        
-        this.usuario = resp.email
-
         this.ngZone.run(() => {
           this.router.navigateByUrl('/')
         })

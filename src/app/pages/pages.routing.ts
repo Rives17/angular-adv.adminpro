@@ -1,3 +1,4 @@
+import { PerfilComponent } from './perfil/perfil.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
@@ -21,8 +22,9 @@ const routes: Routes = [
             { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBar' }  },
             { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Gráfica #1' } },
             { path: 'account-settings', component: AccountSettingComponent, data: { titulo: 'Ajustes' } },
-            { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
+            { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
+            { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
 
         ]
     },
